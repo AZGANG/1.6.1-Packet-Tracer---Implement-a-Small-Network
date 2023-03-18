@@ -1,0 +1,81 @@
+RTA
+enable
+config t
+hostname RTA
+enable secert Ciscoenpa55 
+
+line console 0 
+password Ciscolinepa55 
+login 
+no shut 
+
+line vty 0 15 
+password Ciscolinepa55 
+login 
+no shut 
+exit
+
+banner motd "you are not allowed to access this without authorization"
+
+int g0/0 
+ip address 10.10.10.1 255.255.255.0
+no shutdown 
+description g0/0 
+
+int g0/1 
+ip address 10.10.20.1 255.255.255.0
+description g0/1
+no shutdown 
+exit
+end
+copy running-config startup-config 
+
+
+SW1
+enable
+config t
+hostname SW1
+ip default-gateway 10.10.10.1
+enable secret Ciscoenpa55 
+
+line console 0 
+password Ciscolinepa55 
+login 
+
+line vty 0 15 
+password Ciscolinepa55 
+login 
+
+int vlan 1
+ip address 10.10.10.2 255.255.255.0
+no shut 
+des "Managment"
+exit
+end
+copy running-config startup-config 
+Configure the hosts
+
+
+SW2
+enable
+config t
+hostname SW2
+ip default-gateway 10.10.20.1
+enable secret Ciscoenpa55 
+
+line console 0 
+password Ciscolinepa55 
+login 
+
+line vty 0 15 
+password Ciscolinepa55 
+login 
+
+int vlan 1
+ip address 10.10.20.2 255.255.255.0
+no shut 
+des man
+exit
+end
+copy running-config startup-config 
+Configure the hosts
